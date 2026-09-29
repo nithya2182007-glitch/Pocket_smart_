@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<style>
+  .tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .tab { min-width: 0; }
+  .panel form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .panel form .btn { align-self: end; }
+  @media (max-width: 760px) {
+    .tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .panel form { grid-template-columns: 1fr; }
+  }
+</style>
+<section class="dashboard">
+  <div class="section-head">
+    <div><p class="eyebrow">PERSONAL DASHBOARD</p><h1>Choose your planner</h1></div>
+    <button id="logout" class="btn ghost">Logout</button>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-target="home">Home</button>
+    <button class="tab" data-target="party">Party</button>
+    <button class="tab" data-target="jewelry">Jewelry</button>
+    <button class="tab" data-target="travel">Travel</button>
+    <button class="tab" data-target="meal">Meal</button>
+    <button class="tab" data-target="shopping">Shopping</button>
+  </div>
+  <div id="home" class="panel active card">
+    <h2>Home Interior</h2>
+    <form id="homeForm">
+      <label>Budget (INR)<input name="budget" type="number" min="1" required></label>
+      <label>Rooms<input name="rooms" placeholder="Living Room, Bedroom" required></label>
+      <label>Style<input name="style" value="Modern"></label>
+      <label>Items<input name="items_raw" placeholder="lights=4, fans=2"></label>
+      <label>Notes<textarea name="notes"></textarea></label>
+      <button class="btn">Generate plan</button>
+    </form>
+  </div>
+  <div id="party" class="panel card">
+    <h2>Party Planner</h2>
+    <form id="partyForm">
+      <label>Budget (INR)<input name="budget" type="number" min="1" required></label>
+      <label>Guests<input name="guests" type="number" min="1" required></label>
+      <label>Event type<input name="event_type" value="Birthday"></label>
+      <label>Venue<input name="venue" value="Home"></label>
+      <label>City<input name="city"></label>
+      <label>Notes<textarea name="notes"></textarea></label>
+      <button class="btn">Generate plan</button>
+    </form>
+  </div>
+  <div id="jewelry" class="panel card">
+    <h2>Jewelry Planner</h2>
+    <form id="jewelryForm" enctype="multipart/form-data">
+      <label>Budget (INR)<input name="budget" type="number" min="1" required></label>
+      <label>Occasion<input name="occasion" value="Wedding"></label>
+      <label>Style<input name="style" value="Elegant"></label>
+      <label>Outfit color<input name="outfit_color"></label>
+      <label>Outfit image<input type="file" name="outfit_image" accept="image/*"></label>
+      <label>Notes<textarea name="notes"></textarea></label>
+      <button class="btn">Generate plan</button>
+    </form>
+  </div>
+  <div id="travel" class="panel card">
+    <h2>Travel Planner</h2>
+    <form id="travelForm">
+      <label>Budget (INR)<input name="budget" type="number" min="1" required></label>
+      <label>Destination<input name="destination" placeholder="Coorg" minlength="2" required></label>
+      <label>Days<input name="days" type="number" min="1" max="60" value="3" required></label>
+      <label>Travelers<input name="travelers" type="number" min="1" max="30" value="2" required></label>
+      <label>Travel style<input name="travel_style" value="Balanced"></label>
+      <label>Transport<input name="transport" value="Any"></label>
+      <label>Notes<textarea name="notes"></textarea></label>
+      <button class="btn">Generate plan</button>
+    </form>
+  </div>
+  <div id="meal" class="panel card">
+    <h2>Meal Planner</h2>
+    <form id="mealForm">
+      <label>Budget (INR)<input name="budget" type="number" min="1" required></label>
+      <label>People<input name="people" type="number" min="1" max="100" value="2" required></label>
+      <label>Days<input name="days" type="number" min="1" max="31" value="7" required></label>
+      <label>Cuisine<input name="cuisine" value="Any"></label>
+      <label>Dietary preferences<input name="dietary_preferences" placeholder="Vegetarian, allergies"></label>
+      <label>Notes<textarea name="notes"></textarea></label>
+      <button class="btn">Generate plan</button>
+    </form>
+  </div>
+  <div id="shopping" class="panel card">
+    <h2>Shopping Planner</h2>
+    <form id="shoppingForm">
+      <label>Budget (INR)<input name="budget" type="number" min="1" required></label>
+      <label>Category<input name="category" value="General"></label>
+      <label>Items, separated by commas<input name="items_raw" placeholder="Desk, chair, lamp" required></label>
+      <label>Priority<input name="priority" value="Best value"></label>
+      <label>Notes<textarea name="notes"></textarea></label>
+      <button class="btn">Generate plan</button>
+    </form>
+  </div>
+  <div id="result" class="result"></div>
+  <div class="card"><h2>History</h2><div id="history">Loading...</div></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="/static/js/dashboard.js"></script>{% endblock %}

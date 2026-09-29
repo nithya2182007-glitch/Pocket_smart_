@@ -1,0 +1,9 @@
+[
+  "tests/test_app.py::test_health",
+  "tests/test_app.py::test_home",
+  "tests/test_app.py::test_jewelry",
+  "tests/test_app.py::test_meal",
+  "tests/test_app.py::test_party",
+  "tests/test_app.py::test_shopping",
+  "tests/test_app.py::test_travel"
+]
